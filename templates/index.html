@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seat Allocation</title>
+</head>
+<body>
+    <h1>Seat Allocation</h1>
+
+    <!-- Flash Messages -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <ul>
+                {% for category, message in messages %}
+                    <li class="{{ category }}">{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+
+    <h2>Available Seats</h2>
+    <table border="1">
+        <tr>
+            <th>College Name</th>
+            <th>Branch Name</th>
+            <th>Seats Available</th>
+        </tr>
+        {% for college, branches in available_seats.items() %}
+            {% for branch, seats in branches.items() %}
+                <tr>
+                    <td>{{ college }}</td>
+                    <td>{{ branch }}</td>
+                    <td>{{ seats }}</td>
+                </tr>
+            {% endfor %}
+        {% endfor %}
+    </table>
+
+    <h2>Enter Your Preferences</h2>
+    <form action="{{ url_for('allocate') }}" method="POST">
+        <label for="student_rank">Student Rank:</label>
+        <input type="number" id="student_rank" name="student_rank" required><br><br>
+
+        <label for="college_preferences">College Preferences (comma-separated):</label>
+        <input type="text" id="college_preferences" name="college_preferences" required><br><br>
+
+        <label for="branch_preferences">Branch Preferences (comma-separated):</label>
+        <input type="text" id="branch_preferences" name="branch_preferences" required><br><br>
+
+        <input type="submit" value="Allocate">
+    </form>
+</body>
+</html>
