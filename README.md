@@ -1,5 +1,5 @@
 # DBMS-Mini-Project
 
-*pip install flask
-*pip install mysql-connector-python
-*pip install flask mysql-connector-python
+pip install flask <br>
+pip install mysql-connector-python <br>
+pip install flask mysql-connector-python <br>
